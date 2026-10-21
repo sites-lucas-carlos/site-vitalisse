@@ -165,9 +165,9 @@
 
   const videoHero = $('[data-video-hero]');
   const botaoPausar = $('[data-pausar]');
-  const semMovimento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const economizarDados = Boolean(navigator.connection && navigator.connection.saveData);
-  let pausadoPeloUsuario = semMovimento || economizarDados;
+  const tour = $('.tour');
+  const videoTour = $('[data-tour]');
+  let pausadoPeloUsuario = false;
 
   function marcarBotaoPausar() {
     const pausado = !videoHero || videoHero.paused;
@@ -175,11 +175,30 @@
     $('i', botaoPausar).className = pausado ? 'ph-fill ph-play' : 'ph-fill ph-pause';
   }
 
+  function tocarHero() {
+    if (!videoHero || pausadoPeloUsuario || (videoTour && !videoTour.paused)) return;
+    const tentativa = videoHero.play();
+    if (tentativa && tentativa.catch) tentativa.catch(esperarToque);
+  }
+
+  // Se o navegador bloquear o início automático (ex.: iPhone no modo de economia de bateria),
+  // o vídeo começa no primeiro toque em qualquer lugar da página.
+  let esperandoToque = false;
+  function esperarToque() {
+    if (esperandoToque) return;
+    esperandoToque = true;
+    const eventos = ['touchend', 'click', 'keydown'];
+    const liberar = (e) => {
+      if (e.target.closest && e.target.closest('[data-pausar], .tour')) return;
+      eventos.forEach((ev) => document.removeEventListener(ev, liberar, true));
+      esperandoToque = false;
+      tocarHero();
+    };
+    eventos.forEach((ev) => document.addEventListener(ev, liberar, { capture: true, passive: true }));
+  }
+
   if (videoHero) {
-    if (pausadoPeloUsuario) {
-      videoHero.removeAttribute('autoplay');
-      videoHero.pause();
-    }
+    videoHero.muted = true;
     videoHero.addEventListener('play', marcarBotaoPausar);
     videoHero.addEventListener('pause', marcarBotaoPausar);
     botaoPausar.addEventListener('click', () => {
@@ -187,11 +206,10 @@
       if (videoHero.paused) videoHero.play().catch(() => {});
       else videoHero.pause();
     });
+    document.addEventListener('visibilitychange', () => { if (!document.hidden) tocarHero(); });
     marcarBotaoPausar();
+    tocarHero();
   }
-
-  const tour = $('.tour');
-  const videoTour = $('[data-tour]');
   if (tour && videoTour) {
     $('[data-tour-play]', tour).addEventListener('click', () => {
       tour.classList.add('is-tocando');
@@ -224,7 +242,7 @@
     if (videoHero) {
       new IntersectionObserver(([entrada]) => {
         if (!entrada.isIntersecting) videoHero.pause();
-        else if (!pausadoPeloUsuario && (!videoTour || videoTour.paused)) videoHero.play().catch(() => {});
+        else tocarHero();
       }, { threshold: 0.15 }).observe(videoHero);
     }
 
