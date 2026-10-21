@@ -7,8 +7,7 @@
   <meta name="description" content="Boutique de depilação e esmalteria em Brasília desde 2011. Manicure, pedicure, esmaltação em gel, cera, laser, sobrancelhas, cílios e estética facial nas unidades Sudoeste e Noroeste.">
   <!-- Versão de visualização: não aparece no Google. Apague esta linha quando o site for para o domínio oficial. -->
   <meta name="robots" content="noindex, nofollow">
-  <meta name="theme-color" content="#F7F2F0" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#121310" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#121310">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="pt_BR">
   <meta property="og:title" content="Vitalisse | Boutique de depilação e esmalteria">
@@ -24,7 +23,7 @@
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/light/style.css">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
   <link rel="stylesheet" href="assets/css/styles.css">
-  <link rel="preload" as="image" href="assets/img/unhas-nude.webp" fetchpriority="high">
+  <link rel="preload" as="image" href="assets/img/hero-poster.jpg" fetchpriority="high">
   <script>document.documentElement.classList.add('js');</script>
 
   <script type="application/ld+json">
@@ -113,29 +112,40 @@
 
   <main id="conteudo">
 
-    <section class="hero wrap" id="inicio" aria-labelledby="hero-titulo">
-      <div class="hero__texto">
-        <p class="sobretitulo">Boutique de depilação e esmalteria</p>
-        <h1 id="hero-titulo">Esmalteria e depilação no Sudoeste e no Noroeste.</h1>
-        <p class="hero__sub">Desde 2011 em Brasília. Mão e pé, gel, cera, laser, sobrancelhas, cílios e pele, com todos os preços abertos aqui.</p>
-        <div class="hero__acoes" data-hero-acoes>
-          <button class="botao botao--escuro" type="button" data-agendar>
-            Agendar horário
-            <span class="botao__seta" aria-hidden="true"><i class="ph-light ph-arrow-up-right"></i></span>
-          </button>
-          <a class="botao botao--linha" href="#precos">Ver preços</a>
+    <section class="hero" id="inicio" aria-labelledby="hero-titulo" data-hero>
+      <div class="hero__grade wrap">
+        <div class="hero__texto">
+          <p class="sobretitulo">Sudoeste e Noroeste, desde 2011</p>
+          <h1 id="hero-titulo">Boutique de depilação e esmalteria.</h1>
+          <p class="hero__sub">Unhas, depilação com cera e laser, sobrancelhas, cílios e pele em Brasília, com todos os preços abertos aqui.</p>
+          <div class="hero__acoes" data-hero-acoes>
+            <button class="botao botao--claro" type="button" data-agendar>
+              Agendar horário
+              <span class="botao__seta" aria-hidden="true"><i class="ph-light ph-arrow-up-right"></i></span>
+            </button>
+            <a class="botao botao--linha-clara" href="#precos">Ver preços</a>
+          </div>
+        </div>
+
+        <div class="hero__palco">
+          <div class="hero__video">
+            <video src="assets/video/espaco-vitalisse.mp4" poster="assets/img/hero-poster.jpg"
+                   width="720" height="1280" autoplay muted loop playsinline preload="auto" aria-hidden="true" data-video-hero></video>
+            <button class="hero__pausar" type="button" aria-label="Pausar vídeo" data-pausar>
+              <i class="ph-fill ph-pause" aria-hidden="true"></i>
+            </button>
+          </div>
+          <figure class="hero__cartao hero__cartao--a">
+            <img src="assets/img/unhas-nude.webp" width="981" height="1131"
+                 alt="Mão com unhas quadradas em esmalte nude leitoso e anel dourado">
+          </figure>
+          <figure class="hero__cartao hero__cartao--b">
+            <img src="assets/img/unhas-glitter-vinho.jpg" width="958" height="1034"
+                 alt="Unhas curtas em vinho com glitter avermelhado">
+          </figure>
         </div>
       </div>
-      <div class="hero__fotos">
-        <figure class="hero__foto hero__foto--principal">
-          <img src="assets/img/unhas-nude.webp" width="981" height="1131" fetchpriority="high"
-               alt="Mão com unhas quadradas em esmalte nude leitoso e anel dourado, sobre bolsa marrom">
-        </figure>
-        <figure class="hero__foto hero__foto--detalhe">
-          <img src="assets/img/unhas-glitter-vinho.jpg" width="958" height="1034" loading="lazy"
-               alt="Unhas curtas em vinho com glitter avermelhado">
-        </figure>
-      </div>
+      <span class="hero__fim" aria-hidden="true"></span>
     </section>
 
     <section class="servicos wrap" id="servicos" aria-labelledby="servicos-titulo">
@@ -281,17 +291,31 @@
 
     <section class="experiencia wrap" aria-labelledby="experiencia-titulo">
       <div class="experiencia__painel" data-revelar>
-        <h2 id="experiencia-titulo">Café, Wi-Fi e estacionamento por conta da casa.</h2>
-        <ul class="vantagens">
-          <li><i class="ph-light ph-coffee" aria-hidden="true"></i><strong>Café na chegada</strong><span>A recepção oferece assim que você entra.</span></li>
-          <li><i class="ph-light ph-car-simple" aria-hidden="true"></i><strong>Estacionamento grátis</strong><span>Nas duas unidades.</span></li>
-          <li><i class="ph-light ph-martini" aria-hidden="true"></i><strong>Bar e lanchonete</strong><span>Na unidade Noroeste.</span></li>
-          <li><i class="ph-light ph-wifi-high" aria-hidden="true"></i><strong>Wi-Fi liberado</strong><span>Para quem precisa responder mensagens durante o atendimento.</span></li>
-          <li><i class="ph-light ph-wheelchair" aria-hidden="true"></i><strong>Acessível</strong><span>Entrada para pessoas com deficiência nas duas unidades.</span></li>
-          <li><i class="ph-light ph-baby" aria-hidden="true"></i><strong>Crianças também</strong><span>Esmaltação infantil para mãos e pés.</span></li>
-          <li><i class="ph-light ph-user" aria-hidden="true"></i><strong>Atendimento masculino</strong><span>Mão, pé, sobrancelha, cera e laser.</span></li>
-          <li><i class="ph-light ph-credit-card" aria-hidden="true"></i><strong>PIX e cartões</strong><span>Crédito, débito, dinheiro e vale&#8209;presente.</span></li>
-        </ul>
+        <div class="experiencia__texto">
+          <h2 id="experiencia-titulo">Café, Wi-Fi e estacionamento por conta da casa.</h2>
+          <ul class="vantagens">
+            <li><i class="ph-light ph-coffee" aria-hidden="true"></i><strong>Café na chegada</strong><span>A recepção oferece assim que você entra.</span></li>
+            <li><i class="ph-light ph-car-simple" aria-hidden="true"></i><strong>Estacionamento grátis</strong><span>Nas duas unidades.</span></li>
+            <li><i class="ph-light ph-martini" aria-hidden="true"></i><strong>Bar e lanchonete</strong><span>Na unidade Noroeste.</span></li>
+            <li><i class="ph-light ph-wifi-high" aria-hidden="true"></i><strong>Wi-Fi liberado</strong><span>Para quem precisa responder mensagens durante o atendimento.</span></li>
+            <li><i class="ph-light ph-wheelchair" aria-hidden="true"></i><strong>Acessível</strong><span>Entrada para pessoas com deficiência nas duas unidades.</span></li>
+            <li><i class="ph-light ph-baby" aria-hidden="true"></i><strong>Crianças também</strong><span>Esmaltação infantil para mãos e pés.</span></li>
+            <li><i class="ph-light ph-user" aria-hidden="true"></i><strong>Atendimento masculino</strong><span>Mão, pé, sobrancelha, cera e laser.</span></li>
+            <li><i class="ph-light ph-credit-card" aria-hidden="true"></i><strong>PIX e cartões</strong><span>Crédito, débito, dinheiro e vale&#8209;presente.</span></li>
+          </ul>
+        </div>
+
+        <figure class="tour">
+          <div class="tour__video">
+            <video src="assets/video/tour-noroeste.mp4" poster="assets/img/tour-poster.jpg"
+                   width="720" height="1280" preload="none" playsinline data-tour></video>
+            <button class="tour__play" type="button" data-tour-play>
+              <span class="tour__icone" aria-hidden="true"><i class="ph-fill ph-play"></i></span>
+              Assistir ao tour
+            </button>
+          </div>
+          <figcaption>Tour pela unidade Noroeste, com som. 1min10.</figcaption>
+        </figure>
       </div>
     </section>
 

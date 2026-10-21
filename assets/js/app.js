@@ -144,15 +144,66 @@
   const botaoMenu = $('[data-menu]');
   const menuMovel = $('[data-menu-movel]');
 
+  // O topo fica transparente enquanto está sobre o hero, exceto com o menu do celular aberto.
+  let sobreHero = Boolean($('[data-hero]'));
+  let menuAberto = false;
+  const atualizarTopo = () => topo.classList.toggle('topo--hero', sobreHero && !menuAberto);
+
   function definirMenu(abrir) {
+    menuAberto = abrir;
     botaoMenu.setAttribute('aria-expanded', String(abrir));
     $('.sr', botaoMenu).textContent = abrir ? 'Fechar menu' : 'Abrir menu';
     menuMovel.classList.toggle('is-aberto', abrir);
+    atualizarTopo();
   }
 
   botaoMenu.addEventListener('click', () => definirMenu(botaoMenu.getAttribute('aria-expanded') !== 'true'));
   menuMovel.addEventListener('click', (e) => { if (e.target.closest('a')) definirMenu(false); });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') definirMenu(false); });
+
+  /* Vídeos */
+
+  const videoHero = $('[data-video-hero]');
+  const botaoPausar = $('[data-pausar]');
+  const semMovimento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const economizarDados = Boolean(navigator.connection && navigator.connection.saveData);
+  let pausadoPeloUsuario = semMovimento || economizarDados;
+
+  function marcarBotaoPausar() {
+    const pausado = !videoHero || videoHero.paused;
+    botaoPausar.setAttribute('aria-label', pausado ? 'Tocar vídeo' : 'Pausar vídeo');
+    $('i', botaoPausar).className = pausado ? 'ph-fill ph-play' : 'ph-fill ph-pause';
+  }
+
+  if (videoHero) {
+    if (pausadoPeloUsuario) {
+      videoHero.removeAttribute('autoplay');
+      videoHero.pause();
+    }
+    videoHero.addEventListener('play', marcarBotaoPausar);
+    videoHero.addEventListener('pause', marcarBotaoPausar);
+    botaoPausar.addEventListener('click', () => {
+      pausadoPeloUsuario = !videoHero.paused;
+      if (videoHero.paused) videoHero.play().catch(() => {});
+      else videoHero.pause();
+    });
+    marcarBotaoPausar();
+  }
+
+  const tour = $('.tour');
+  const videoTour = $('[data-tour]');
+  if (tour && videoTour) {
+    $('[data-tour-play]', tour).addEventListener('click', () => {
+      tour.classList.add('is-tocando');
+      videoTour.controls = true;
+      videoTour.play().catch(() => {});
+      if (videoHero && !videoHero.paused) videoHero.pause();
+    });
+    videoTour.addEventListener('ended', () => {
+      tour.classList.remove('is-tocando');
+      videoTour.controls = false;
+    });
+  }
 
   /* Observadores de rolagem */
 
@@ -160,6 +211,22 @@
     new IntersectionObserver(([entrada]) => {
       topo.classList.toggle('is-rolado', !entrada.isIntersecting);
     }).observe($('.sentinela'));
+
+    const fimHero = $('.hero__fim');
+    if (fimHero) {
+      new IntersectionObserver(([entrada]) => {
+        sobreHero = entrada.isIntersecting || entrada.boundingClientRect.top > 0;
+        atualizarTopo();
+      }).observe(fimHero);
+    }
+
+    // O vídeo do hero só roda enquanto aparece na tela.
+    if (videoHero) {
+      new IntersectionObserver(([entrada]) => {
+        if (!entrada.isIntersecting) videoHero.pause();
+        else if (!pausadoPeloUsuario && (!videoTour || videoTour.paused)) videoHero.play().catch(() => {});
+      }, { threshold: 0.15 }).observe(videoHero);
+    }
 
     const revelar = new IntersectionObserver((entradas) => {
       for (const entrada of entradas) {
@@ -185,6 +252,7 @@
   } else {
     $$('[data-revelar]').forEach((el) => el.classList.add('is-visivel'));
   }
+  atualizarTopo();
 
   atualizarSituacao();
   setInterval(atualizarSituacao, 60 * 1000);
