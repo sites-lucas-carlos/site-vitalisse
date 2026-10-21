@@ -320,6 +320,7 @@ ul { margin: 0; padding: 0; list-style: none; }
   grid-template-columns: minmax(0, 1.4fr) minmax(0, 0.6fr);
   align-items: center;
   gap: clamp(2rem, 1rem + 3vw, 4rem);
+  min-height: min(100vh, 960px);
   min-height: min(100dvh, 960px);
   padding-top: calc(var(--topo-h) + clamp(1.5rem, 1rem + 2vw, 3rem));
   padding-bottom: clamp(3rem, 2rem + 3vw, 5rem);
@@ -349,23 +350,28 @@ ul { margin: 0; padding: 0; list-style: none; }
 .botao--linha-clara { border-color: rgb(244 233 228 / 0.38); color: var(--hero-ink); background: transparent; }
 .botao--linha-clara:hover { border-color: var(--hero-ink); }
 
+/* Medidas explícitas (sem aspect-ratio/inset) para funcionar também em navegadores de celular mais antigos. */
 .hero__palco {
+  --palco-h: min(76vh, 700px);
   position: relative;
-  height: min(76dvh, 700px);
+  height: var(--palco-h);
+}
+@supports (height: 1dvh) {
+  .hero__palco { --palco-h: min(76dvh, 700px); }
 }
 
 .hero__video {
   position: absolute;
   top: 0;
   right: 0;
+  width: calc(var(--palco-h) * 9 / 16);
   height: 100%;
-  aspect-ratio: 9 / 16;
   overflow: hidden;
   border-radius: 24px;
   background: #1C1D19;
   box-shadow: 0 0 0 1px rgb(233 191 177 / 0.18), 0 40px 80px -30px rgb(0 0 0 / 0.8);
 }
-.hero__video video { width: 100%; height: 100%; object-fit: cover; }
+.hero__video video { display: block; width: 100%; height: 100%; max-width: none; object-fit: cover; }
 
 .hero__pausar {
   position: absolute;
@@ -396,12 +402,12 @@ ul { margin: 0; padding: 0; list-style: none; }
 }
 .hero__cartao img { width: 100%; height: 100%; object-fit: cover; }
 /* Os cartões saem um pouco para a esquerda do vídeo, na altura do texto curto (subtítulo e botões). */
-.hero__cartao--a { right: calc(min(76dvh, 700px) * 9 / 16 - 64px); bottom: 7%; width: 200px; aspect-ratio: 4 / 5; z-index: 1; }
-.hero__cartao--b { right: calc(min(76dvh, 700px) * 9 / 16 - 40px); top: 5%; width: 132px; aspect-ratio: 1; }
+.hero__cartao--a { right: calc(var(--palco-h) * 9 / 16 - 64px); bottom: 7%; width: 200px; height: 250px; z-index: 1; }
+.hero__cartao--b { right: calc(var(--palco-h) * 9 / 16 - 40px); top: 5%; width: 132px; height: 132px; }
 
 @media (min-width: 900px) and (max-width: 1140px) {
-  .hero__cartao--a { width: 156px; }
-  .hero__cartao--b { width: 108px; }
+  .hero__cartao--a { width: 156px; height: 195px; }
+  .hero__cartao--b { width: 108px; height: 108px; }
 }
 
 .hero__fim { position: absolute; left: 0; bottom: var(--topo-h); width: 1px; height: 1px; }
@@ -411,24 +417,25 @@ ul { margin: 0; padding: 0; list-style: none; }
   .hero__grade {
     grid-template-columns: 1fr;
     align-items: end;
+    min-height: 100vh;
     min-height: 100svh;
     padding-bottom: 2.25rem;
   }
   .hero__texto { position: relative; z-index: 1; }
   .hero h1 { max-width: 10ch; }
   .hero__sub { color: rgb(244 233 228 / 0.86); }
-  .hero__palco { position: absolute; inset: 0; height: auto; z-index: 0; }
+  .hero__palco { position: absolute; top: 0; right: 0; bottom: 0; left: 0; height: auto; z-index: 0; }
   .hero__video {
-    inset: 0;
+    top: 0; right: 0; bottom: 0; left: 0;
+    width: auto;
     height: auto;
-    aspect-ratio: auto;
     border-radius: 0;
     box-shadow: none;
   }
   .hero__video::after {
     content: "";
     position: absolute;
-    inset: 0;
+    top: 0; right: 0; bottom: 0; left: 0;
     pointer-events: none;
     background: linear-gradient(to top,
       rgb(18 19 16 / 0.96) 0%, rgb(18 19 16 / 0.86) 40%, rgb(18 19 16 / 0.5) 58%, rgb(18 19 16 / 0.12) 76%, rgb(18 19 16 / 0.45) 100%);
@@ -506,12 +513,12 @@ ul { margin: 0; padding: 0; list-style: none; }
 
 .bloco--foto { grid-row: 1 / span 2; color: #F8EEE9; min-height: 520px; }
 .bloco--foto img {
-  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2;
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2;
   transition: transform 1.2s var(--ease);
 }
 .bloco--foto:hover img { transform: scale(1.03); }
 .bloco--foto::after {
-  content: ""; position: absolute; inset: 0; z-index: -1;
+  content: ""; position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: -1;
   background: linear-gradient(to top, rgb(22 24 19 / 0.9) 0%, rgb(22 24 19 / 0.66) 42%, rgb(22 24 19 / 0) 76%);
 }
 .bloco--oliva { grid-column: 2 / span 2; background: var(--oliva); color: var(--oliva-ink); }
