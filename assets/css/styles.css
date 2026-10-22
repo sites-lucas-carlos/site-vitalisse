@@ -349,6 +349,14 @@ ul { margin: 0; padding: 0; list-style: none; }
 .botao--claro .botao__seta { background: rgb(26 28 23 / 0.08); }
 .botao--linha-clara { border-color: rgb(244 233 228 / 0.38); color: var(--hero-ink); background: transparent; }
 .botao--linha-clara:hover { border-color: var(--hero-ink); }
+.botao--vidro {
+  background: rgb(244 233 228 / 0.14);
+  border-color: rgb(244 233 228 / 0.3);
+  color: var(--hero-ink);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+.botao--vidro:hover { background: rgb(244 233 228 / 0.24); }
 
 /* Medidas explícitas (sem aspect-ratio/inset) para funcionar também em navegadores de celular mais antigos. */
 .hero__palco {
@@ -430,7 +438,7 @@ ul { margin: 0; padding: 0; list-style: none; }
     padding-bottom: 2.25rem;
   }
   .hero__texto { position: relative; z-index: 1; }
-  .hero h1 { max-width: 10ch; }
+  .hero h1 { font-size: clamp(2.35rem, 1.5rem + 3.6vw, 3rem); }
   .hero__sub { color: rgb(244 233 228 / 0.86); }
   .hero__palco { position: absolute; top: 0; right: 0; bottom: 0; left: 0; height: auto; z-index: 0; }
   .hero__video {
@@ -476,6 +484,67 @@ ul { margin: 0; padding: 0; list-style: none; }
     transition: opacity 0.8s var(--ease), transform 0.9s var(--ease);
   }
   .js [data-revelar].is-visivel { opacity: 1; transform: none; }
+}
+
+/* Resultados */
+
+.resultados { padding-block: var(--secao); }
+
+.galeria {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+.galeria__item {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--r-media);
+  background: var(--bg-2);
+  aspect-ratio: 1;
+}
+.galeria__item img {
+  position: absolute; top: 0; left: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 1.2s var(--ease);
+}
+.galeria__item:hover img { transform: scale(1.03); }
+.galeria__item--grande { grid-column: span 2; grid-row: span 2; }
+
+.insta {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-top: 14px;
+  padding: 1.25rem clamp(1.25rem, 1rem + 1vw, 2rem);
+  border-radius: var(--r-media);
+  background: var(--bg-2);
+  text-decoration: none;
+  transition: background-color 0.3s var(--ease);
+}
+.insta:hover { background: var(--rosa); }
+.insta:active { transform: scale(0.995); }
+.insta__icone {
+  flex: none;
+  display: grid; place-items: center;
+  width: 56px; height: 56px;
+  border-radius: 999px;
+  background: var(--botao);
+  color: var(--botao-ink);
+}
+.insta__icone i { font-size: 1.6rem; }
+.insta__texto { flex: 1; display: grid; gap: 0.15rem; }
+.insta__texto strong { font-weight: 500; font-size: 1.2rem; line-height: 1.3; }
+.insta__texto span { color: var(--ink-2); font-size: 0.95rem; }
+.insta__acao { display: inline-flex; align-items: center; gap: 0.4rem; font-weight: 500; white-space: nowrap; }
+.insta__acao i { transition: transform 0.35s var(--ease); }
+.insta:hover .insta__acao i { transform: translate(2px, -2px); }
+
+@media (max-width: 899px) {
+  .galeria { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .insta { margin-top: 10px; flex-wrap: wrap; align-items: flex-start; }
+  .insta__texto { flex-basis: calc(100% - 56px - 1.25rem); }
+  .insta__acao { padding-left: calc(56px + 1.25rem); }
 }
 
 /* Serviços (bento) */

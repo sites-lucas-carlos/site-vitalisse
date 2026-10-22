@@ -23,7 +23,7 @@
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/light/style.css">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
   <!-- O "?v=" força o celular a baixar CSS e JS novos junto com a página. Ao mudar esses arquivos, aumente o número (aqui e nos scripts no fim). -->
-  <link rel="stylesheet" href="assets/css/styles.css?v=4">
+  <link rel="stylesheet" href="assets/css/styles.css?v=5">
   <link rel="preload" as="image" href="assets/img/hero-poster.jpg" fetchpriority="high">
   <script>document.documentElement.classList.add('js');</script>
 
@@ -88,6 +88,7 @@
       </a>
       <nav class="menu" aria-label="Principal">
         <ul>
+          <li><a href="#resultados">Resultados</a></li>
           <li><a href="#servicos">Serviços</a></li>
           <li><a href="#precos">Preços</a></li>
           <li><a href="#equipe">Equipe</a></li>
@@ -102,6 +103,7 @@
     </div>
     <nav class="menu-movel" id="menu-movel" aria-label="Principal no celular" data-menu-movel>
       <ul>
+        <li><a href="#resultados">Resultados</a></li>
         <li><a href="#servicos">Serviços</a></li>
         <li><a href="#precos">Preços</a></li>
         <li><a href="#equipe">Equipe</a></li>
@@ -117,13 +119,16 @@
       <div class="hero__grade wrap">
         <div class="hero__texto">
           <p class="sobretitulo">Sudoeste e Noroeste, desde 2011</p>
-          <h1 id="hero-titulo">Boutique de depilação e esmalteria.</h1>
-          <p class="hero__sub">Unhas, depilação com cera e laser, sobrancelhas, cílios e pele em Brasília, com todos os preços abertos aqui.</p>
+          <h1 id="hero-titulo">Boutique de depilação e esmalteria em Brasília.</h1>
+          <p class="hero__sub">Unhas, depilação com cera e laser, sobrancelhas, cílios e pele, com todos os preços abertos aqui.</p>
           <div class="hero__acoes" data-hero-acoes>
             <button class="botao botao--claro" type="button" data-agendar>
               Agendar horário
               <span class="botao__seta" aria-hidden="true"><i class="ph-light ph-arrow-up-right"></i></span>
             </button>
+            <a class="botao botao--vidro" href="https://www.instagram.com/esmalteriavitalisse/" target="_blank" rel="noopener">
+              <i class="ph-light ph-instagram-logo" aria-hidden="true"></i> Instagram
+            </a>
             <a class="botao botao--linha-clara" href="#precos">Ver preços</a>
           </div>
         </div>
@@ -147,6 +152,45 @@
         </div>
       </div>
       <span class="hero__fim" aria-hidden="true"></span>
+    </section>
+
+    <section class="resultados wrap" id="resultados" aria-labelledby="resultados-titulo">
+      <div class="cabeca" data-revelar>
+        <h2 id="resultados-titulo">Unhas feitas na Vitalisse</h2>
+        <p>Resultados reais, publicados no nosso Instagram.</p>
+      </div>
+
+      <div class="galeria">
+        <figure class="galeria__item galeria__item--grande" data-revelar>
+          <img src="assets/img/unhas-francesinha.webp" width="1203" height="1212" loading="lazy"
+               alt="Unhas amendoadas com francesinha branca fina, sobre bolsa jeans matelassê">
+        </figure>
+        <figure class="galeria__item" data-revelar>
+          <img src="assets/img/unhas-degrade.webp" width="1226" height="1204" loading="lazy"
+               alt="Unhas amendoadas longas em rosa translúcido com pontas brancas em degradê, com anéis dourados">
+        </figure>
+        <figure class="galeria__item" data-revelar>
+          <img src="assets/img/unhas-branco-leitoso.webp" width="1228" height="1212" loading="lazy"
+               alt="Unhas curtas quadradas em branco leitoso, com anéis de brilhantes">
+        </figure>
+        <figure class="galeria__item" data-revelar>
+          <img src="assets/img/unhas-perolado.webp" width="970" height="759" loading="lazy"
+               alt="Unhas amendoadas com efeito perolado e anel dourado grande">
+        </figure>
+        <figure class="galeria__item" data-revelar>
+          <img src="assets/img/unhas-vermelhas.webp" width="922" height="1169" loading="lazy"
+               alt="Unhas amendoadas em vermelho clássico segurando a alça de uma bolsa">
+        </figure>
+      </div>
+
+      <a class="insta" href="https://www.instagram.com/esmalteriavitalisse/" target="_blank" rel="noopener" data-revelar>
+        <span class="insta__icone" aria-hidden="true"><i class="ph-light ph-instagram-logo"></i></span>
+        <span class="insta__texto">
+          <strong>Tem muito mais no Instagram</strong>
+          <span>Mais de 250 posts com resultados, novidades e o dia a dia das duas unidades.</span>
+        </span>
+        <span class="insta__acao">@esmalteriavitalisse <i class="ph-light ph-arrow-up-right" aria-hidden="true"></i></span>
+      </a>
     </section>
 
     <section class="servicos wrap" id="servicos" aria-labelledby="servicos-titulo">
@@ -484,7 +528,7 @@
     </div>
   </dialog>
 
-  <script src="assets/js/servicos.js?v=4"></script>
-  <script src="assets/js/app.js?v=4"></script>
+  <script src="assets/js/servicos.js?v=5"></script>
+  <script src="assets/js/app.js?v=5"></script>
 </body>
 </html>
